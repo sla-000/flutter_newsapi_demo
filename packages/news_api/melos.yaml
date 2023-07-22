@@ -1,0 +1,50 @@
+name: newsapi_demo
+
+packages:
+  - '.'
+  - '*'
+  - '**'
+
+scripts:
+  generate:
+    description: "Generate sources and format"
+    run: |
+      dart run melos exec --concurrency=1 --\
+        dart pub run build_runner build --delete-conflicting-outputs && \
+        dart run melos run format
+
+  analyze:
+    description: "Analyze"
+    run: |
+      dart run melos exec --concurrency=1 --\
+        flutter analyze
+
+  check:
+    description: "Check format, analyze and test"
+    run: |
+      dart run melos exec --concurrency=1 --\
+        dart run melos run format:check && \
+        dart run melos run analyze && \
+        dart run melos run test && \
+        dart run melos run coverage:check
+
+  format:
+    description: "Format"
+    run: |
+      dart run melos exec --\
+        dart format .
+
+  test:
+    description: "Test"
+    packageFilters:
+      dirExists:
+        - test
+    run: |
+      dart run melos exec --concurrency=1 --\
+        flutter test --coverage -j 1 .
+
+  upgrade:
+    description: "Upgrade"
+    run: |
+      dart run melos exec --concurrency=1 --\
+        flutter pub upgrade --major-versions
