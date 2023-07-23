@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../di/di.dart';
 import '../../../domain/models/article_source_domain_model.dart';
-import '../cubit/sources_cubit.dart';
+import '../cubits/sources_cubit.dart';
 
 class AllSources extends StatelessWidget {
   const AllSources({
@@ -13,18 +13,16 @@ class AllSources extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        final sourcesCubit = di<SourcesCubit>();
+  Widget build(BuildContext context) => BlocProvider(
+        create: (_) {
+          final sourcesCubit = di<SourcesCubit>();
 
-        unawaited(sourcesCubit.load());
+          unawaited(sourcesCubit.load());
 
-        return sourcesCubit;
-      },
-      child: const AllSourcesNews(),
-    );
-  }
+          return sourcesCubit;
+        },
+        child: const AllSourcesNews(),
+      );
 }
 
 class AllSourcesNews extends StatelessWidget {
@@ -89,7 +87,5 @@ class OneSourceNews extends StatelessWidget {
   final ArticleSourceDomainModel source;
 
   @override
-  Widget build(BuildContext context) {
-    return Center(child: Text(source.id));
-  }
+  Widget build(BuildContext context) => Center(child: Text(source.id));
 }

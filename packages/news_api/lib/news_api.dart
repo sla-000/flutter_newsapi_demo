@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 import 'models/sources/sources_request.dart';
 import 'models/sources/sources_response.dart';
 import 'models/top_headlines/top_headlines_request.dart';
+import 'models/top_headlines/top_headlines_response.dart';
 
 const _url = 'newsapi.org';
 const _scheme = 'https';
@@ -36,7 +37,7 @@ class NewsApi {
     return SourcesResponse.fromJson(json);
   }
 
-  Future<SourcesResponse> getTopHeadlines({
+  Future<TopHeadlinesResponse> getTopHeadlines({
     required TopHeadlinesRequest topHeadlinesRequest,
   }) async {
     final url = Uri(
@@ -50,7 +51,7 @@ class NewsApi {
 
     final json = checkResponse(response);
 
-    return SourcesResponse.fromJson(json);
+    return TopHeadlinesResponse.fromJson(json);
   }
 
   @visibleForTesting
