@@ -30,12 +30,13 @@ class NewsApi {
 
     final response = await client.get(url);
 
-    final json = _checkResponse(response);
+    final json = checkResponse(response);
 
     return SourcesResponse.fromJson(json);
   }
 
-  Map<String, dynamic> _checkResponse(http.Response response) {
+  @visibleForTesting
+  Map<String, dynamic> checkResponse(http.Response response) {
     final statusCode = response.statusCode;
 
     if (statusCode < 200 || statusCode >= 300) {
