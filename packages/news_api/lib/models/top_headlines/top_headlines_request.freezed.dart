@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'top_lines_request.dart';
+part of 'top_headlines_request.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TopLinesRequest _$TopLinesRequestFromJson(Map<String, dynamic> json) {
-  return _TopLinesRequest.fromJson(json);
+TopHeadlinesRequest _$TopHeadlinesRequestFromJson(Map<String, dynamic> json) {
+  return _TopHeadlinesRequest.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TopLinesRequest {
+mixin _$TopHeadlinesRequest {
   /// Your API key. Alternatively you can provide this via the X-Api-Key HTTP header.
   String get apiKey => throw _privateConstructorUsedError;
 
@@ -43,15 +43,15 @@ mixin _$TopLinesRequest {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TopLinesRequestCopyWith<TopLinesRequest> get copyWith =>
+  $TopHeadlinesRequestCopyWith<TopHeadlinesRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TopLinesRequestCopyWith<$Res> {
-  factory $TopLinesRequestCopyWith(
-          TopLinesRequest value, $Res Function(TopLinesRequest) then) =
-      _$TopLinesRequestCopyWithImpl<$Res, TopLinesRequest>;
+abstract class $TopHeadlinesRequestCopyWith<$Res> {
+  factory $TopHeadlinesRequestCopyWith(
+          TopHeadlinesRequest value, $Res Function(TopHeadlinesRequest) then) =
+      _$TopHeadlinesRequestCopyWithImpl<$Res, TopHeadlinesRequest>;
   @useResult
   $Res call(
       {String apiKey,
@@ -64,9 +64,9 @@ abstract class $TopLinesRequestCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TopLinesRequestCopyWithImpl<$Res, $Val extends TopLinesRequest>
-    implements $TopLinesRequestCopyWith<$Res> {
-  _$TopLinesRequestCopyWithImpl(this._value, this._then);
+class _$TopHeadlinesRequestCopyWithImpl<$Res, $Val extends TopHeadlinesRequest>
+    implements $TopHeadlinesRequestCopyWith<$Res> {
+  _$TopHeadlinesRequestCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -118,11 +118,11 @@ class _$TopLinesRequestCopyWithImpl<$Res, $Val extends TopLinesRequest>
 }
 
 /// @nodoc
-abstract class _$$_TopLinesRequestCopyWith<$Res>
-    implements $TopLinesRequestCopyWith<$Res> {
-  factory _$$_TopLinesRequestCopyWith(
-          _$_TopLinesRequest value, $Res Function(_$_TopLinesRequest) then) =
-      __$$_TopLinesRequestCopyWithImpl<$Res>;
+abstract class _$$_TopHeadlinesRequestCopyWith<$Res>
+    implements $TopHeadlinesRequestCopyWith<$Res> {
+  factory _$$_TopHeadlinesRequestCopyWith(_$_TopHeadlinesRequest value,
+          $Res Function(_$_TopHeadlinesRequest) then) =
+      __$$_TopHeadlinesRequestCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -136,11 +136,11 @@ abstract class _$$_TopLinesRequestCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TopLinesRequestCopyWithImpl<$Res>
-    extends _$TopLinesRequestCopyWithImpl<$Res, _$_TopLinesRequest>
-    implements _$$_TopLinesRequestCopyWith<$Res> {
-  __$$_TopLinesRequestCopyWithImpl(
-      _$_TopLinesRequest _value, $Res Function(_$_TopLinesRequest) _then)
+class __$$_TopHeadlinesRequestCopyWithImpl<$Res>
+    extends _$TopHeadlinesRequestCopyWithImpl<$Res, _$_TopHeadlinesRequest>
+    implements _$$_TopHeadlinesRequestCopyWith<$Res> {
+  __$$_TopHeadlinesRequestCopyWithImpl(_$_TopHeadlinesRequest _value,
+      $Res Function(_$_TopHeadlinesRequest) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_TopLinesRequestCopyWithImpl<$Res>
     Object? pageSize = freezed,
     Object? page = freezed,
   }) {
-    return _then(_$_TopLinesRequest(
+    return _then(_$_TopHeadlinesRequest(
       apiKey: null == apiKey
           ? _value.apiKey
           : apiKey // ignore: cast_nullable_to_non_nullable
@@ -189,8 +189,8 @@ class __$$_TopLinesRequestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TopLinesRequest implements _TopLinesRequest {
-  const _$_TopLinesRequest(
+class _$_TopHeadlinesRequest implements _TopHeadlinesRequest {
+  const _$_TopHeadlinesRequest(
       {required this.apiKey,
       this.country,
       this.category,
@@ -199,8 +199,8 @@ class _$_TopLinesRequest implements _TopLinesRequest {
       this.pageSize,
       this.page});
 
-  factory _$_TopLinesRequest.fromJson(Map<String, dynamic> json) =>
-      _$$_TopLinesRequestFromJson(json);
+  factory _$_TopHeadlinesRequest.fromJson(Map<String, dynamic> json) =>
+      _$$_TopHeadlinesRequestFromJson(json);
 
   /// Your API key. Alternatively you can provide this via the X-Api-Key HTTP header.
   @override
@@ -232,14 +232,14 @@ class _$_TopLinesRequest implements _TopLinesRequest {
 
   @override
   String toString() {
-    return 'TopLinesRequest(apiKey: $apiKey, country: $country, category: $category, sources: $sources, q: $q, pageSize: $pageSize, page: $page)';
+    return 'TopHeadlinesRequest(apiKey: $apiKey, country: $country, category: $category, sources: $sources, q: $q, pageSize: $pageSize, page: $page)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TopLinesRequest &&
+            other is _$_TopHeadlinesRequest &&
             (identical(other.apiKey, apiKey) || other.apiKey == apiKey) &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.category, category) ||
@@ -259,29 +259,30 @@ class _$_TopLinesRequest implements _TopLinesRequest {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TopLinesRequestCopyWith<_$_TopLinesRequest> get copyWith =>
-      __$$_TopLinesRequestCopyWithImpl<_$_TopLinesRequest>(this, _$identity);
+  _$$_TopHeadlinesRequestCopyWith<_$_TopHeadlinesRequest> get copyWith =>
+      __$$_TopHeadlinesRequestCopyWithImpl<_$_TopHeadlinesRequest>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TopLinesRequestToJson(
+    return _$$_TopHeadlinesRequestToJson(
       this,
     );
   }
 }
 
-abstract class _TopLinesRequest implements TopLinesRequest {
-  const factory _TopLinesRequest(
+abstract class _TopHeadlinesRequest implements TopHeadlinesRequest {
+  const factory _TopHeadlinesRequest(
       {required final String apiKey,
       final String? country,
       final String? category,
       final String? sources,
       final String? q,
       final int? pageSize,
-      final int? page}) = _$_TopLinesRequest;
+      final int? page}) = _$_TopHeadlinesRequest;
 
-  factory _TopLinesRequest.fromJson(Map<String, dynamic> json) =
-      _$_TopLinesRequest.fromJson;
+  factory _TopHeadlinesRequest.fromJson(Map<String, dynamic> json) =
+      _$_TopHeadlinesRequest.fromJson;
 
   @override
 
@@ -313,6 +314,6 @@ abstract class _TopLinesRequest implements TopLinesRequest {
   int? get page;
   @override
   @JsonKey(ignore: true)
-  _$$_TopLinesRequestCopyWith<_$_TopLinesRequest> get copyWith =>
+  _$$_TopHeadlinesRequestCopyWith<_$_TopHeadlinesRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }

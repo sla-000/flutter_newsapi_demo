@@ -3,39 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'src/di/di.dart';
-import 'src/domain/models/article_source_domain_model.dart';
-import 'src/presentation/sources/cubit/sources_cubit.dart';
-
-void main() {
-  configureDependencies();
-
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        darkTheme: ThemeData.dark(
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(),
-      );
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) => const AllSources();
-}
+import '../../../di/di.dart';
+import '../../../domain/models/article_source_domain_model.dart';
+import '../cubit/sources_cubit.dart';
 
 class AllSources extends StatelessWidget {
   const AllSources({
@@ -102,7 +72,7 @@ class AllSourcesNewsSuccess extends StatelessWidget {
         ),
         body: TabBarView(
           children: sources
-              .map((source) => ASourceNews(source: source))
+              .map((source) => OneSourceNews(source: source))
               .toList(growable: false),
         ),
       ),
@@ -110,8 +80,8 @@ class AllSourcesNewsSuccess extends StatelessWidget {
   }
 }
 
-class ASourceNews extends StatelessWidget {
-  const ASourceNews({
+class OneSourceNews extends StatelessWidget {
+  const OneSourceNews({
     super.key,
     required this.source,
   });

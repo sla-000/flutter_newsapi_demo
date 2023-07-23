@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import 'models/sources/sources_request.dart';
 import 'models/sources/sources_response.dart';
+import 'models/top_headlines/top_headlines_request.dart';
 
 const _url = 'newsapi.org';
 const _scheme = 'https';
@@ -35,6 +36,23 @@ class NewsApi {
     return SourcesResponse.fromJson(json);
   }
 
+  Future<SourcesResponse> getTopHeadlines({
+    required TopHeadlinesRequest topHeadlinesRequest,
+  }) async {
+    final url = Uri(
+      scheme: _scheme,
+      host: _url,
+      path: 'v2/top-headlines',
+      queryParameters: topHeadlinesRequest.toJson(),
+    );
+
+    final response = await client.get(url);
+
+    final json = checkResponse(response);
+
+    return SourcesResponse.fromJson(json);
+  }
+
   @visibleForTesting
   Map<String, dynamic> checkResponse(http.Response response) {
     final statusCode = response.statusCode;
@@ -47,12 +65,12 @@ class NewsApi {
     final json = jsonDecode(response.body);
 
     if (json is! Map<String, dynamic>) {
-      throw HttpException('Wrong format of body=$json');
+      throw HttpException('Wrong format of response body=$json');
     }
 
     if (json['status'] != 'ok') {
       throw HttpException(
-          'Request error code=${json['code']}, message=${json['message']}');
+          'Status is not ok, code=${json['code']}, message=${json['message']}');
     }
 
     return json;

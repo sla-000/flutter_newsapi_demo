@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'top_lines_response.dart';
+part of 'top_headlines_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TopLinesResponse _$TopLinesResponseFromJson(Map<String, dynamic> json) {
-  return _TopLinesResponse.fromJson(json);
+TopHeadlinesResponse _$TopHeadlinesResponseFromJson(Map<String, dynamic> json) {
+  return _TopHeadlinesResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TopLinesResponse {
+mixin _$TopHeadlinesResponse {
   /// If the request was successful or not. Options: ok, error. In the case of error a code and message property will be populated.
   String get status => throw _privateConstructorUsedError;
 
@@ -31,23 +31,24 @@ mixin _$TopLinesResponse {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TopLinesResponseCopyWith<TopLinesResponse> get copyWith =>
+  $TopHeadlinesResponseCopyWith<TopHeadlinesResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TopLinesResponseCopyWith<$Res> {
-  factory $TopLinesResponseCopyWith(
-          TopLinesResponse value, $Res Function(TopLinesResponse) then) =
-      _$TopLinesResponseCopyWithImpl<$Res, TopLinesResponse>;
+abstract class $TopHeadlinesResponseCopyWith<$Res> {
+  factory $TopHeadlinesResponseCopyWith(TopHeadlinesResponse value,
+          $Res Function(TopHeadlinesResponse) then) =
+      _$TopHeadlinesResponseCopyWithImpl<$Res, TopHeadlinesResponse>;
   @useResult
   $Res call({String status, int totalResults, List<ArticleItem> articles});
 }
 
 /// @nodoc
-class _$TopLinesResponseCopyWithImpl<$Res, $Val extends TopLinesResponse>
-    implements $TopLinesResponseCopyWith<$Res> {
-  _$TopLinesResponseCopyWithImpl(this._value, this._then);
+class _$TopHeadlinesResponseCopyWithImpl<$Res,
+        $Val extends TopHeadlinesResponse>
+    implements $TopHeadlinesResponseCopyWith<$Res> {
+  _$TopHeadlinesResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -79,22 +80,22 @@ class _$TopLinesResponseCopyWithImpl<$Res, $Val extends TopLinesResponse>
 }
 
 /// @nodoc
-abstract class _$$_TopLinesResponseCopyWith<$Res>
-    implements $TopLinesResponseCopyWith<$Res> {
-  factory _$$_TopLinesResponseCopyWith(
-          _$_TopLinesResponse value, $Res Function(_$_TopLinesResponse) then) =
-      __$$_TopLinesResponseCopyWithImpl<$Res>;
+abstract class _$$_TopHeadlinesResponseCopyWith<$Res>
+    implements $TopHeadlinesResponseCopyWith<$Res> {
+  factory _$$_TopHeadlinesResponseCopyWith(_$_TopHeadlinesResponse value,
+          $Res Function(_$_TopHeadlinesResponse) then) =
+      __$$_TopHeadlinesResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String status, int totalResults, List<ArticleItem> articles});
 }
 
 /// @nodoc
-class __$$_TopLinesResponseCopyWithImpl<$Res>
-    extends _$TopLinesResponseCopyWithImpl<$Res, _$_TopLinesResponse>
-    implements _$$_TopLinesResponseCopyWith<$Res> {
-  __$$_TopLinesResponseCopyWithImpl(
-      _$_TopLinesResponse _value, $Res Function(_$_TopLinesResponse) _then)
+class __$$_TopHeadlinesResponseCopyWithImpl<$Res>
+    extends _$TopHeadlinesResponseCopyWithImpl<$Res, _$_TopHeadlinesResponse>
+    implements _$$_TopHeadlinesResponseCopyWith<$Res> {
+  __$$_TopHeadlinesResponseCopyWithImpl(_$_TopHeadlinesResponse _value,
+      $Res Function(_$_TopHeadlinesResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +105,7 @@ class __$$_TopLinesResponseCopyWithImpl<$Res>
     Object? totalResults = null,
     Object? articles = null,
   }) {
-    return _then(_$_TopLinesResponse(
+    return _then(_$_TopHeadlinesResponse(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -123,15 +124,15 @@ class __$$_TopLinesResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TopLinesResponse implements _TopLinesResponse {
-  const _$_TopLinesResponse(
+class _$_TopHeadlinesResponse implements _TopHeadlinesResponse {
+  const _$_TopHeadlinesResponse(
       {required this.status,
       required this.totalResults,
       required final List<ArticleItem> articles})
       : _articles = articles;
 
-  factory _$_TopLinesResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_TopLinesResponseFromJson(json);
+  factory _$_TopHeadlinesResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_TopHeadlinesResponseFromJson(json);
 
   /// If the request was successful or not. Options: ok, error. In the case of error a code and message property will be populated.
   @override
@@ -154,14 +155,14 @@ class _$_TopLinesResponse implements _TopLinesResponse {
 
   @override
   String toString() {
-    return 'TopLinesResponse(status: $status, totalResults: $totalResults, articles: $articles)';
+    return 'TopHeadlinesResponse(status: $status, totalResults: $totalResults, articles: $articles)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TopLinesResponse &&
+            other is _$_TopHeadlinesResponse &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.totalResults, totalResults) ||
                 other.totalResults == totalResults) &&
@@ -176,25 +177,26 @@ class _$_TopLinesResponse implements _TopLinesResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TopLinesResponseCopyWith<_$_TopLinesResponse> get copyWith =>
-      __$$_TopLinesResponseCopyWithImpl<_$_TopLinesResponse>(this, _$identity);
+  _$$_TopHeadlinesResponseCopyWith<_$_TopHeadlinesResponse> get copyWith =>
+      __$$_TopHeadlinesResponseCopyWithImpl<_$_TopHeadlinesResponse>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TopLinesResponseToJson(
+    return _$$_TopHeadlinesResponseToJson(
       this,
     );
   }
 }
 
-abstract class _TopLinesResponse implements TopLinesResponse {
-  const factory _TopLinesResponse(
+abstract class _TopHeadlinesResponse implements TopHeadlinesResponse {
+  const factory _TopHeadlinesResponse(
       {required final String status,
       required final int totalResults,
-      required final List<ArticleItem> articles}) = _$_TopLinesResponse;
+      required final List<ArticleItem> articles}) = _$_TopHeadlinesResponse;
 
-  factory _TopLinesResponse.fromJson(Map<String, dynamic> json) =
-      _$_TopLinesResponse.fromJson;
+  factory _TopHeadlinesResponse.fromJson(Map<String, dynamic> json) =
+      _$_TopHeadlinesResponse.fromJson;
 
   @override
 
@@ -210,6 +212,6 @@ abstract class _TopLinesResponse implements TopLinesResponse {
   List<ArticleItem> get articles;
   @override
   @JsonKey(ignore: true)
-  _$$_TopLinesResponseCopyWith<_$_TopLinesResponse> get copyWith =>
+  _$$_TopHeadlinesResponseCopyWith<_$_TopHeadlinesResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }

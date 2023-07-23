@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'top_lines_request.freezed.dart';
-part 'top_lines_request.g.dart';
+part 'top_headlines_request.freezed.dart';
+part 'top_headlines_request.g.dart';
 
 @freezed
-class TopLinesRequest with _$TopLinesRequest {
-  const factory TopLinesRequest({
+class TopHeadlinesRequest with _$TopHeadlinesRequest {
+  const factory TopHeadlinesRequest({
     /// Your API key. Alternatively you can provide this via the X-Api-Key HTTP header.
     required String apiKey,
 
@@ -26,8 +26,8 @@ class TopLinesRequest with _$TopLinesRequest {
 
     /// Use this to page through the results if the total results found is greater than the page size.
     int? page,
-  }) = _TopLinesRequest;
+  }) = _TopHeadlinesRequest;
 
-  factory TopLinesRequest.fromJson(Map<String, Object?> json) =>
-      _$TopLinesRequestFromJson(json);
+  factory TopHeadlinesRequest.fromJson(Map<String, Object?> json) =>
+      _$TopHeadlinesRequestFromJson(json);
 }

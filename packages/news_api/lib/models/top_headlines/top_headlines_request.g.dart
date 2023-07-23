@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'top_lines_request.dart';
+part of 'top_headlines_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TopLinesRequest _$$_TopLinesRequestFromJson(Map<String, dynamic> json) =>
-    _$_TopLinesRequest(
+_$_TopHeadlinesRequest _$$_TopHeadlinesRequestFromJson(
+        Map<String, dynamic> json) =>
+    _$_TopHeadlinesRequest(
       apiKey: json['apiKey'] as String,
       country: json['country'] as String?,
       category: json['category'] as String?,
@@ -17,7 +18,8 @@ _$_TopLinesRequest _$$_TopLinesRequestFromJson(Map<String, dynamic> json) =>
       page: json['page'] as int?,
     );
 
-Map<String, dynamic> _$$_TopLinesRequestToJson(_$_TopLinesRequest instance) =>
+Map<String, dynamic> _$$_TopHeadlinesRequestToJson(
+        _$_TopHeadlinesRequest instance) =>
     <String, dynamic>{
       'apiKey': instance.apiKey,
       'country': instance.country,

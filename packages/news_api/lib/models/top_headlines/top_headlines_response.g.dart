@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'top_lines_response.dart';
+part of 'top_headlines_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TopLinesResponse _$$_TopLinesResponseFromJson(Map<String, dynamic> json) =>
-    _$_TopLinesResponse(
+_$_TopHeadlinesResponse _$$_TopHeadlinesResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_TopHeadlinesResponse(
       status: json['status'] as String,
       totalResults: json['totalResults'] as int,
       articles: (json['articles'] as List<dynamic>)
@@ -15,7 +16,8 @@ _$_TopLinesResponse _$$_TopLinesResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_TopLinesResponseToJson(_$_TopLinesResponse instance) =>
+Map<String, dynamic> _$$_TopHeadlinesResponseToJson(
+        _$_TopHeadlinesResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'totalResults': instance.totalResults,
