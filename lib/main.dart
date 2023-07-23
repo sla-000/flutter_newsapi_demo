@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:news_api/models/sources/sources_request.dart';
-import 'package:news_api/news_api.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/di/di.dart';
+import 'src/domain/models/article_source_domain_model.dart';
+import 'src/presentation/sources/cubit/sources_cubit.dart';
 
 void main() {
   configureDependencies();
@@ -14,76 +17,98 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        darkTheme: ThemeData.dark(
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(),
+      );
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) => BlocProvider(
+        create: (_) {
+          final sourcesCubit = di<SourcesCubit>();
+
+          unawaited(sourcesCubit.load());
+
+          return sourcesCubit;
+        },
+        child: const AllSourcesNews(),
+      );
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class AllSourcesNews extends StatelessWidget {
+  const AllSourcesNews({
+    super.key,
+  });
 
-  Future<void> _incrementCounter() async {
-    final response = await di<NewsApi>().getSources(
-      sourcesRequest: SourcesRequest(
-        apiKey: '2e3aa1fa71014cbf9ac5fcb0d8d4cb1f',
-        language: 'en',
-        country: 'us',
-        category: 'technology',
-      ),
-    );
+  @override
+  Widget build(BuildContext context) => BlocBuilder<SourcesCubit, SourcesState>(
+        builder: (context, state) => state.when(
+          initial: SizedBox.shrink,
+          loading: () => const Center(child: CircularProgressIndicator()),
+          success: (sources) => AllSourcesNewsSuccess(sources: sources),
+          error: (error, _) => Center(child: Text('Error: $error')),
+        ),
+      );
+}
 
-    print('@@@ response=${response}');
+class AllSourcesNewsSuccess extends StatelessWidget {
+  const AllSourcesNewsSuccess({
+    super.key,
+    required this.sources,
+  });
 
-    setState(() {
-      _counter++;
-    });
-  }
+  final List<ArticleSourceDomainModel> sources;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    if (sources.isEmpty) {
+      return const Center(child: Text('No sources'));
+    }
+
+    return DefaultTabController(
+      length: sources.length,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: const Text('NewsAPI Demo'),
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: sources
+                .map((source) => Tab(text: source.name))
+                .toList(growable: false),
+          ),
+        ),
+        body: TabBarView(
+          children: sources
+              .map((source) => ASourceNews(source: source))
+              .toList(growable: false),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
+  }
+}
+
+class ASourceNews extends StatelessWidget {
+  const ASourceNews({
+    super.key,
+    required this.source,
+  });
+
+  final ArticleSourceDomainModel source;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text(source.id));
   }
 }

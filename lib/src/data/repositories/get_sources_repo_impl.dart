@@ -1,18 +1,28 @@
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:news_api/news_api.dart';
 
 import '../../domain/models/article_source_domain_model.dart';
 import '../../domain/repositories/get_sources_repo.dart';
+import '../mappers/sources_request_mapper.dart';
+import '../mappers/sources_response_mapper.dart';
 
 @Injectable(as: GetSourcesRepo)
 class GetSourcesRepoImpl implements GetSourcesRepo {
   GetSourcesRepoImpl({
-    required this.client,
+    required this.api,
+    required this.sourcesRequestMapper,
+    required this.sourcesResponseMapper,
   });
 
   @protected
-  final http.Client client;
+  final NewsApi api;
+
+  @protected
+  final SourcesRequestMapper sourcesRequestMapper;
+
+  @protected
+  final SourcesResponseMapper sourcesResponseMapper;
 
   @override
   Future<List<ArticleSourceDomainModel>> getSources({
@@ -20,6 +30,16 @@ class GetSourcesRepoImpl implements GetSourcesRepo {
     String? category,
     String language = 'en',
     String country = 'us',
-  }) async =>
-      [];
+  }) async {
+    final response = await api.getSources(
+      sourcesRequest: sourcesRequestMapper.call(
+        apiKey: apiKey,
+        category: category,
+        country: country,
+        language: language,
+      ),
+    );
+
+    return sourcesResponseMapper.call(response);
+  }
 }
