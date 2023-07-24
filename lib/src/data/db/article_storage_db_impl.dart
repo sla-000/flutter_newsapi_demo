@@ -8,7 +8,7 @@ import '../../domain/models/article_domain_model.dart';
 @Injectable(as: ArticleStorageDb)
 class ArticleStorageDbImpl implements ArticleStorageDb {
   @override
-  Future<void> saveArticle({
+  FutureOr<void> saveArticle({
     /// The author of the article
     required String? author,
 
@@ -26,12 +26,12 @@ class ArticleStorageDbImpl implements ArticleStorageDb {
 
     /// The direct URL to the article.
     required String? url,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    // todo Implement
   }
 
   @override
-  Future<void> removeArticle({
+  FutureOr<void> removeArticle({
     /// The author of the article
     required String? author,
 
@@ -40,12 +40,12 @@ class ArticleStorageDbImpl implements ArticleStorageDb {
 
     /// The date and time that the article was published, in UTC (+000)
     required String? publishedAt,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    // todo Implement
   }
 
   @override
-  Future<bool> checkArticleIsSaved({
+  FutureOr<bool> checkArticleIsSaved({
     /// The author of the article
     required String? author,
 
@@ -54,12 +54,14 @@ class ArticleStorageDbImpl implements ArticleStorageDb {
 
     /// The date and time that the article was published, in UTC (+000)
     required String? publishedAt,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    // todo Implement
+    return false;
   }
 
   @override
-  Future<List<ArticleDomainModel>> loadAllArticles() {
-    throw UnimplementedError();
+  FutureOr<List<ArticleDomainModel>> loadAllArticles() async {
+    // todo Implement
+    return [];
   }
 }
