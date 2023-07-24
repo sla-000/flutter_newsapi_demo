@@ -142,7 +142,10 @@ class TimeAuthorLike extends StatelessWidget {
               children: [
                 if (article.publishedAt != null)
                   Text(
-                    getLocalizedTime(context, article.publishedAt!),
+                    getLocalizedTime(
+                      Localizations.localeOf(context),
+                      article.publishedAt!,
+                    ),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 if (article.author != null)

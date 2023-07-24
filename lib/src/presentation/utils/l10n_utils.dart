@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-String getLocalizedTime(BuildContext context, String time) {
+String getLocalizedTime(Locale locale, String time) {
   final localTime = DateTime.parse(time).toLocal();
-  final locale = Localizations.localeOf(context).toString();
+  final currentLocale = locale.toString();
 
-  final dateStr = DateFormat.yMMMMEEEEd(locale).format(localTime);
-  final timeStr = DateFormat.Hms(locale).format(localTime);
-
-  return '$dateStr $timeStr';
+  return DateFormat.yMMMMEEEEd(currentLocale).add_jms().format(localTime);
 }
