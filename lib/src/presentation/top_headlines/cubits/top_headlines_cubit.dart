@@ -23,6 +23,7 @@ class TopHeadlinesCubit extends Cubit<TopHeadlinesState> {
 
       final articles = await getTopHeadlinesUsecase.call(
         sources: sourceIds.isEmpty ? null : sourceIds,
+        country: sourceIds.isEmpty ? 'us' : null,
       );
 
       emit(TopHeadlinesState.success(articles: articles));

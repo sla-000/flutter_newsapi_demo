@@ -16,7 +16,7 @@ class GetTopHeadlinesUsecase {
 
   Future<List<ArticleDomainModel>> call({
     /// The 2-letter ISO 3166-1 code of the country you want to get headlines for. Possible options: aearataubebgbrcachcncocuczdeegfrgbgrhkhuidieilinitjpkrltlvmamxmyngnlnonzphplptrorsrusasesgsiskthtrtwuausveza. Note: you can't mix this param with the sources param.
-    String country = 'us',
+    String? country,
 
     /// The category you want to get headlines for. Possible options: businessentertainmentgeneralhealthsciencesportstechnology. Note: you can't mix this param with the sources param.
     String? category,

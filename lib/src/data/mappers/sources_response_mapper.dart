@@ -11,5 +11,5 @@ class SourcesResponseMapper {
                 id: source.id,
                 name: source.name,
               ))
-          .toList();
+          .toList(growable: false);
 }

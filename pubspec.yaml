@@ -40,6 +40,7 @@ dependencies:
   meta: ^1.9.1
   news_api:
     path: ./packages/news_api
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   bloc_test: ^9.1.3

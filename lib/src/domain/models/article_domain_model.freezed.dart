@@ -20,16 +20,19 @@ mixin _$ArticleDomainModel {
   String? get author => throw _privateConstructorUsedError;
 
   /// The headline or title of the article.
-  String get title => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
 
   /// A description or snippet from the article.
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   /// The date and time that the article was published, in UTC (+000)
-  String get publishedAt => throw _privateConstructorUsedError;
+  String? get publishedAt => throw _privateConstructorUsedError;
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
   String? get content => throw _privateConstructorUsedError;
+
+  /// The direct URL to the article.
+  String? get url => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ArticleDomainModelCopyWith<ArticleDomainModel> get copyWith =>
@@ -44,10 +47,11 @@ abstract class $ArticleDomainModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String? author,
-      String title,
-      String description,
-      String publishedAt,
-      String? content});
+      String? title,
+      String? description,
+      String? publishedAt,
+      String? content,
+      String? url});
 }
 
 /// @nodoc
@@ -64,31 +68,36 @@ class _$ArticleDomainModelCopyWithImpl<$Res, $Val extends ArticleDomainModel>
   @override
   $Res call({
     Object? author = freezed,
-    Object? title = null,
-    Object? description = null,
-    Object? publishedAt = null,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? publishedAt = freezed,
     Object? content = freezed,
+    Object? url = freezed,
   }) {
     return _then(_value.copyWith(
       author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: null == title
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      publishedAt: null == publishedAt
+              as String?,
+      publishedAt: freezed == publishedAt
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -104,10 +113,11 @@ abstract class _$$_ArticleDomainModelCopyWith<$Res>
   @useResult
   $Res call(
       {String? author,
-      String title,
-      String description,
-      String publishedAt,
-      String? content});
+      String? title,
+      String? description,
+      String? publishedAt,
+      String? content,
+      String? url});
 }
 
 /// @nodoc
@@ -122,31 +132,36 @@ class __$$_ArticleDomainModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? author = freezed,
-    Object? title = null,
-    Object? description = null,
-    Object? publishedAt = null,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? publishedAt = freezed,
     Object? content = freezed,
+    Object? url = freezed,
   }) {
     return _then(_$_ArticleDomainModel(
       author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: null == title
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      publishedAt: null == publishedAt
+              as String?,
+      publishedAt: freezed == publishedAt
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -160,7 +175,8 @@ class _$_ArticleDomainModel implements _ArticleDomainModel {
       required this.title,
       required this.description,
       required this.publishedAt,
-      required this.content});
+      required this.content,
+      required this.url});
 
   /// The author of the article
   @override
@@ -168,23 +184,27 @@ class _$_ArticleDomainModel implements _ArticleDomainModel {
 
   /// The headline or title of the article.
   @override
-  final String title;
+  final String? title;
 
   /// A description or snippet from the article.
   @override
-  final String description;
+  final String? description;
 
   /// The date and time that the article was published, in UTC (+000)
   @override
-  final String publishedAt;
+  final String? publishedAt;
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
   @override
   final String? content;
 
+  /// The direct URL to the article.
+  @override
+  final String? url;
+
   @override
   String toString() {
-    return 'ArticleDomainModel(author: $author, title: $title, description: $description, publishedAt: $publishedAt, content: $content)';
+    return 'ArticleDomainModel(author: $author, title: $title, description: $description, publishedAt: $publishedAt, content: $content, url: $url)';
   }
 
   @override
@@ -198,12 +218,13 @@ class _$_ArticleDomainModel implements _ArticleDomainModel {
                 other.description == description) &&
             (identical(other.publishedAt, publishedAt) ||
                 other.publishedAt == publishedAt) &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.url, url) || other.url == url));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, author, title, description, publishedAt, content);
+      runtimeType, author, title, description, publishedAt, content, url);
 
   @JsonKey(ignore: true)
   @override
@@ -216,10 +237,11 @@ class _$_ArticleDomainModel implements _ArticleDomainModel {
 abstract class _ArticleDomainModel implements ArticleDomainModel {
   const factory _ArticleDomainModel(
       {required final String? author,
-      required final String title,
-      required final String description,
-      required final String publishedAt,
-      required final String? content}) = _$_ArticleDomainModel;
+      required final String? title,
+      required final String? description,
+      required final String? publishedAt,
+      required final String? content,
+      required final String? url}) = _$_ArticleDomainModel;
 
   @override
 
@@ -228,19 +250,23 @@ abstract class _ArticleDomainModel implements ArticleDomainModel {
   @override
 
   /// The headline or title of the article.
-  String get title;
+  String? get title;
   @override
 
   /// A description or snippet from the article.
-  String get description;
+  String? get description;
   @override
 
   /// The date and time that the article was published, in UTC (+000)
-  String get publishedAt;
+  String? get publishedAt;
   @override
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
   String? get content;
+  @override
+
+  /// The direct URL to the article.
+  String? get url;
   @override
   @JsonKey(ignore: true)
   _$$_ArticleDomainModelCopyWith<_$_ArticleDomainModel> get copyWith =>

@@ -22,7 +22,12 @@ class AllSources extends StatelessWidget {
           loading: () => const AnimatedSwitcher(
             key: Key('SourcesList'),
             duration: _switchDuration,
-            child: Center(child: CircularProgressIndicator()),
+            child: SizedBox(
+              height: 100,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
           ),
           success: (sources, selectedIds) => AnimatedSwitcher(
             key: const Key('SourcesList'),
@@ -58,10 +63,11 @@ class SourcesListLoaded extends StatelessWidget {
     }
 
     return Wrap(
+      spacing: 8,
       children: sources
           .map(
             (source) => Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(vertical: 4),
               child: SourceChip(
                 id: source.id,
                 name: source.name,

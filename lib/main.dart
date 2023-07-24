@@ -48,19 +48,31 @@ class MyHomePage extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             title: const Text('NewsAPI Demo'),
           ),
-          body: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              child: Scrollbar(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AllSources(),
-                    SizedBox(height: 16),
-                    ArticlesForSource(),
-                  ],
-                ),
+          body: const AppBody(),
+        ),
+      );
+}
+
+class AppBody extends StatelessWidget {
+  const AppBody({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) => RefreshIndicator(
+        onRefresh: context.read<SourcesCubit>().load,
+        child: const SingleChildScrollView(
+          child: Scrollbar(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AllSources(),
+                  SizedBox(height: 16),
+                  ArticlesForSource(),
+                ],
               ),
             ),
           ),

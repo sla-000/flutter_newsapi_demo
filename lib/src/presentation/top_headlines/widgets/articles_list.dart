@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../../di/di.dart';
 import '../../../domain/models/article_domain_model.dart';
 import '../cubits/top_headlines_cubit.dart';
 
@@ -12,28 +12,7 @@ const _switchDuration = Duration(milliseconds: 500);
 const _spacing = 12.0;
 
 class ArticlesList extends StatelessWidget {
-  const ArticlesList({
-    super.key,
-    required this.selectedIds,
-  });
-
-  final Set<String> selectedIds;
-
-  @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (context) {
-          final topHeadlinesCubit = di<TopHeadlinesCubit>();
-
-          unawaited(topHeadlinesCubit.load(sourceIds: selectedIds));
-
-          return topHeadlinesCubit;
-        },
-        child: const ArticlesListInner(),
-      );
-}
-
-class ArticlesListInner extends StatelessWidget {
-  const ArticlesListInner({super.key});
+  const ArticlesList({super.key});
 
   @override
   Widget build(BuildContext context) =>
@@ -88,50 +67,71 @@ class OneArticle extends StatelessWidget {
   final ArticleDomainModel article;
 
   @override
-  Widget build(BuildContext context) => Card(
-        child: Padding(
-          padding: const EdgeInsets.all(_spacing),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Wrap(
-                      spacing: 16,
-                      children: [
-                        Text(
-                          _getTime(context, article.publishedAt),
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        if (article.author != null)
-                          Text(
-                            article.author!,
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                      ],
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(_spacing),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Wrap(
+                        spacing: 16,
+                        children: [
+                          if (article.publishedAt != null)
+                            Text(
+                              _getTime(context, article.publishedAt!),
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          if (article.author != null)
+                            Text(
+                              article.author!,
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                        ],
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.favorite_outline),
-                    onPressed: () {},
+                    IconButton(
+                      icon: const Icon(Icons.favorite_outline),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                if (article.title != null) ...[
+                  const SizedBox(height: _spacing),
+                  Text(
+                    article.title!,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
-              ),
-              const SizedBox(height: _spacing),
-              Text(
-                article.title,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: _spacing),
-              Text(article.description),
-              if (article.content != null) ...[
-                const SizedBox(height: _spacing),
-                Text(article.content!)
+                if (article.description != null) ...[
+                  const SizedBox(height: _spacing),
+                  Text(article.description!),
+                ],
+                if (article.content != null) ...[
+                  const SizedBox(height: _spacing),
+                  Text(article.content!)
+                ],
+                if (article.url != null) ...[
+                  const SizedBox(height: _spacing),
+                  InkWell(
+                    onTap: () => unawaited(launchUrl(Uri.parse(article.url!))),
+                    child: Text(
+                      article.url!,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.blue,
+                            decorationStyle: TextDecorationStyle.solid,
+                          ),
+                    ),
+                  )
+                ],
               ],
-            ],
+            ),
           ),
         ),
       );

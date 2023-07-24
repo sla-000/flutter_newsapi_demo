@@ -14,7 +14,8 @@ class TopHeadlinesResponseMapper {
               description: source.description,
               publishedAt: source.publishedAt,
               title: source.title,
+              url: source.url,
             ),
           )
-          .toList();
+          .toList(growable: false);
 }
