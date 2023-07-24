@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../domain/models/article_domain_model.dart';
+import '../../utils/l10n_utils.dart';
 import '../cubits/top_headlines_cubit.dart';
 
 const _switchDuration = Duration(milliseconds: 500);
@@ -88,32 +88,7 @@ class OneArticle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Wrap(
-                        spacing: 16,
-                        children: [
-                          if (article.publishedAt != null)
-                            Text(
-                              _getTime(context, article.publishedAt!),
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                          if (article.author != null)
-                            Text(
-                              article.author!,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.favorite_outline),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
+                TimeAuthorLike(article: article),
                 if (article.title != null) ...[
                   const SizedBox(height: _spacing),
                   Text(
@@ -147,14 +122,41 @@ class OneArticle extends StatelessWidget {
           ),
         ),
       );
+}
 
-  String _getTime(BuildContext context, String time) {
-    final localTime = DateTime.parse(time).toLocal();
-    final locale = Localizations.localeOf(context).toString();
+class TimeAuthorLike extends StatelessWidget {
+  const TimeAuthorLike({
+    super.key,
+    required this.article,
+  });
 
-    final dateStr = DateFormat.yMMMMEEEEd(locale).format(localTime);
-    final timeStr = DateFormat.Hms(locale).format(localTime);
+  final ArticleDomainModel article;
 
-    return '$dateStr $timeStr';
-  }
+  @override
+  Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Wrap(
+              spacing: 16,
+              children: [
+                if (article.publishedAt != null)
+                  Text(
+                    getLocalizedTime(context, article.publishedAt!),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                if (article.author != null)
+                  Text(
+                    article.author!,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.favorite_outline),
+            onPressed: () {},
+          ),
+        ],
+      );
 }
