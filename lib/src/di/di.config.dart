@@ -59,7 +59,7 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.ArticleStorageDb>(() => _i4.ArticleStorageDbImpl());
+    gh.lazySingleton<_i3.ArticleStorageDb>(() => _i4.ArticleStorageDbImpl());
     gh.factory<_i5.AuthService>(() => _i5.AuthService());
     gh.factory<_i6.CheckArticleSavedUsecase>(() => _i6.CheckArticleSavedUsecase(
         articleStorageDb: gh<_i3.ArticleStorageDb>()));
@@ -75,7 +75,7 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i12.TopHeadlinesRequestMapper());
     gh.factory<_i13.TopHeadlinesResponseMapper>(
         () => _i13.TopHeadlinesResponseMapper());
-    gh.factory<_i14.GetSourcesRepo>(() => _i15.GetSourcesRepoImpl(
+    gh.lazySingleton<_i14.GetSourcesRepo>(() => _i15.GetSourcesRepoImpl(
           api: gh<_i16.NewsApi>(),
           sourcesRequestMapper: gh<_i10.SourcesRequestMapper>(),
           sourcesResponseMapper: gh<_i11.SourcesResponseMapper>(),
@@ -84,11 +84,12 @@ extension GetItInjectableX on _i1.GetIt {
           authService: gh<_i5.AuthService>(),
           getSourcesRepo: gh<_i14.GetSourcesRepo>(),
         ));
-    gh.factory<_i18.GetTopHeadlinesRepo>(() => _i19.GetTopHeadlinesRepoImpl(
-          api: gh<_i16.NewsApi>(),
-          topHeadlinesRequestMapper: gh<_i12.TopHeadlinesRequestMapper>(),
-          topHeadlinesResponseMapper: gh<_i13.TopHeadlinesResponseMapper>(),
-        ));
+    gh.lazySingleton<_i18.GetTopHeadlinesRepo>(
+        () => _i19.GetTopHeadlinesRepoImpl(
+              api: gh<_i16.NewsApi>(),
+              topHeadlinesRequestMapper: gh<_i12.TopHeadlinesRequestMapper>(),
+              topHeadlinesResponseMapper: gh<_i13.TopHeadlinesResponseMapper>(),
+            ));
     gh.factory<_i20.GetTopHeadlinesUsecase>(() => _i20.GetTopHeadlinesUsecase(
           authService: gh<_i5.AuthService>(),
           getTopHeadlinesRepo: gh<_i18.GetTopHeadlinesRepo>(),

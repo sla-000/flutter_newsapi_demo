@@ -7,7 +7,7 @@ import '../../domain/repositories/get_top_headlines_repo.dart';
 import '../mappers/top_headlines_request_mapper.dart';
 import '../mappers/top_headlines_response_mapper.dart';
 
-@Injectable(as: GetTopHeadlinesRepo)
+@LazySingleton(as: GetTopHeadlinesRepo)
 class GetTopHeadlinesRepoImpl implements GetTopHeadlinesRepo {
   GetTopHeadlinesRepoImpl({
     required this.api,

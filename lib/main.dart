@@ -4,18 +4,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/di/di.dart';
+import 'src/domain/db/article_storage_db.dart';
 import 'src/presentation/sources/cubits/sources_cubit.dart';
 import 'src/presentation/sources/widgets/all_sources.dart';
 import 'src/presentation/top_headlines/widgets/articles_for_source.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   configureDependencies();
+
+  await di<ArticleStorageDb>().init();
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void dispose() {
+    unawaited(di.reset());
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => MaterialApp(

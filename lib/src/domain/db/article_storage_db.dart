@@ -3,6 +3,10 @@ import 'dart:async';
 import '../models/article_domain_model.dart';
 
 abstract class ArticleStorageDb {
+  FutureOr<void> init();
+
+  FutureOr<void> close();
+
   FutureOr<void> saveArticle({
     /// The author of the article
     required String? author,

@@ -7,7 +7,7 @@ import '../../domain/repositories/get_sources_repo.dart';
 import '../mappers/sources_request_mapper.dart';
 import '../mappers/sources_response_mapper.dart';
 
-@Injectable(as: GetSourcesRepo)
+@LazySingleton(as: GetSourcesRepo)
 class GetSourcesRepoImpl implements GetSourcesRepo {
   GetSourcesRepoImpl({
     required this.api,
