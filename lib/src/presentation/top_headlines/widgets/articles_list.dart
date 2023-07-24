@@ -84,7 +84,9 @@ class ArticlesListLoaded extends StatelessWidget {
       );
 
   bool _isArticleTheSame(
-          FavoriteArticle favoriteArticle, ArticleDomainModel article) =>
+    FavoriteArticle favoriteArticle,
+    ArticleDomainModel article,
+  ) =>
       favoriteArticle.title == article.title &&
       favoriteArticle.publishedAt == article.publishedAt;
 }
@@ -188,12 +190,16 @@ class TimeAuthorLike extends StatelessWidget {
                 : const Icon(Icons.favorite_outline),
             onPressed: () {
               isFavorite
-                  ? unawaited(context
-                      .read<TopHeadlinesCubit>()
-                      .removeFromFavorite(article: article))
-                  : unawaited(context
-                      .read<TopHeadlinesCubit>()
-                      .addToFavorite(article: article));
+                  ? unawaited(
+                      context
+                          .read<TopHeadlinesCubit>()
+                          .removeFromFavorite(article: article),
+                    )
+                  : unawaited(
+                      context
+                          .read<TopHeadlinesCubit>()
+                          .addToFavorite(article: article),
+                    );
             },
           ),
         ],

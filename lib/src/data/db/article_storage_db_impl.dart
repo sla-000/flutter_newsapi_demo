@@ -118,9 +118,11 @@ class ArticleStorageDbImpl implements ArticleStorageDb {
     /// The date and time that the article was published, in UTC (+000)
     required String? publishedAt,
   }) async {
-    final results = await _db.query(_articles,
-        where: '$_title = ? AND $_publishedAt = ?',
-        whereArgs: [title, publishedAt]);
+    final results = await _db.query(
+      _articles,
+      where: '$_title = ? AND $_publishedAt = ?',
+      whereArgs: [title, publishedAt],
+    );
 
     return results.isNotEmpty;
   }

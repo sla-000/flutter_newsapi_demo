@@ -2,15 +2,21 @@
 
 NewsAPI demo
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Auth Token
 
-A few resources to get you started if this is your first Flutter project:
+Put your token here:
+lib/src/domain/services/auth_service.dart
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Limit is 100 requests per day 
+Also uncomment one - maybe it will work
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## How it works
+
+When none of sources is selected the favorite articles are displayed (from local DB)
+
+When you select one or more sources the articles are updated (from API)
+
+When you tap the favorite button you add or delete article from favorites (local DB)
+

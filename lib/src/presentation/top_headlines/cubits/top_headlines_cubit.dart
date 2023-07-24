@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import '../../../domain/models/article_domain_model.dart';
 import '../../../domain/usecases/check_article_saved_usecase.dart';
 import '../../../domain/usecases/get_top_headlines_usecase.dart';
+import '../../../domain/usecases/load_all_articles_usecase.dart';
 import '../../../domain/usecases/remove_article_usecase.dart';
 import '../../../domain/usecases/save_article_usecase.dart';
 import 'favorite_article.dart';
@@ -23,6 +24,7 @@ class TopHeadlinesCubit extends Cubit<TopHeadlinesState> {
     required this.saveArticleUsecase,
     required this.removeArticleUsecase,
     required this.checkArticleSavedUsecase,
+    required this.loadAllArticlesUsecase,
   }) : super(const TopHeadlinesState.initial()) {
     _timer = Timer.periodic(_refreshPeriod, _onTimer);
   }
@@ -35,6 +37,8 @@ class TopHeadlinesCubit extends Cubit<TopHeadlinesState> {
   final RemoveArticleUsecase removeArticleUsecase;
   @protected
   final CheckArticleSavedUsecase checkArticleSavedUsecase;
+  @protected
+  final LoadAllArticlesUsecase loadAllArticlesUsecase;
 
   late final Timer _timer;
 
@@ -57,15 +61,16 @@ class TopHeadlinesCubit extends Cubit<TopHeadlinesState> {
   }
 
   Future<void> load({required Iterable<String> sourceIds}) async {
-    if (sourceIds.isEmpty) {
-      emit(const TopHeadlinesState.initial());
-      return;
-    }
-
     try {
       emit(const TopHeadlinesState.loading());
 
-      final articles = await getTopHeadlinesUsecase.call(sources: sourceIds);
+      late final List<ArticleDomainModel> articles;
+
+      if (sourceIds.isEmpty) {
+        articles = await loadAllArticlesUsecase.call();
+      } else {
+        articles = await getTopHeadlinesUsecase.call(sources: sourceIds);
+      }
 
       final favoriteArticles = <FavoriteArticle>{};
 

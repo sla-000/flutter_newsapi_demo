@@ -101,6 +101,7 @@ extension GetItInjectableX on _i1.GetIt {
           saveArticleUsecase: gh<_i9.SaveArticleUsecase>(),
           removeArticleUsecase: gh<_i8.RemoveArticleUsecase>(),
           checkArticleSavedUsecase: gh<_i6.CheckArticleSavedUsecase>(),
+          loadAllArticlesUsecase: gh<_i7.LoadAllArticlesUsecase>(),
         ));
     return this;
   }
