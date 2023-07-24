@@ -34,7 +34,7 @@ class ArticlesList extends StatelessWidget {
               ),
             ),
           ),
-          success: (articles) => AnimatedSwitcher(
+          success: (articles, sourcesIds) => AnimatedSwitcher(
             key: const Key('ArticlesList'),
             duration: _switchDuration,
             child: ArticlesListLoaded(articles: articles),

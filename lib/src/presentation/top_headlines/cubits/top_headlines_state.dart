@@ -8,6 +8,7 @@ class TopHeadlinesState with _$TopHeadlinesState {
 
   const factory TopHeadlinesState.success({
     required List<ArticleDomainModel> articles,
+    @Default({}) Set<String> sourcesIds,
   }) = TopHeadlinesStateSuccess;
 
   const factory TopHeadlinesState.error({
