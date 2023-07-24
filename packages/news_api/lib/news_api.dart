@@ -60,7 +60,8 @@ class NewsApi {
 
     if (statusCode < 200 || statusCode >= 300) {
       throw HttpException(
-          'Wrong status code=$statusCode, reason=${response.reasonPhrase}');
+        'Wrong status code=$statusCode, reason=${response.reasonPhrase}',
+      );
     }
 
     final json = jsonDecode(response.body);
@@ -71,7 +72,8 @@ class NewsApi {
 
     if (json['status'] != 'ok') {
       throw HttpException(
-          'Status is not ok, code=${json['code']}, message=${json['message']}');
+        'Status is not ok, code=${json['code']}, message=${json['message']}',
+      );
     }
 
     return json;

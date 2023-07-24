@@ -7,9 +7,11 @@ import '../../domain/models/article_source_domain_model.dart';
 class SourcesResponseMapper {
   List<ArticleSourceDomainModel> call(SourcesResponse response) =>
       response.sources
-          .map((source) => ArticleSourceDomainModel(
-                id: source.id,
-                name: source.name,
-              ))
+          .map(
+            (source) => ArticleSourceDomainModel(
+              id: source.id,
+              name: source.name,
+            ),
+          )
           .toList(growable: false);
 }

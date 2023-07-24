@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -18,14 +20,17 @@ void main() {
 
   setUp(() {
     when(
+      // ignore: discarded_futures
       () => mockGetSourcesUsecase.call(
         category: any(named: 'category'),
         country: any(named: 'country'),
         language: any(named: 'language'),
       ),
-    ).thenAnswer((_) async => [
-          mockArticleSourceDomainModel,
-        ]);
+    ).thenAnswer(
+      (_) async => [
+        mockArticleSourceDomainModel,
+      ],
+    );
   });
 
   group('SourcesCubit tests - ', () {
@@ -36,7 +41,7 @@ void main() {
       build: () => SourcesCubit(
         getSourcesUsecase: mockGetSourcesUsecase,
       ),
-      act: (bloc) => bloc.load(),
+      act: (bloc) => unawaited(bloc.load()),
       expect: () => [
         const SourcesState.loading(),
         SourcesState.success(sources: [mockArticleSourceDomainModel]),

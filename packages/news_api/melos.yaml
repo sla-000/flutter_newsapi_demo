@@ -34,6 +34,12 @@ scripts:
       dart run melos exec --\
         dart format .
 
+  format:check:
+    description: "Check format"
+    run: |
+      dart run melos exec --concurrency=1 --\
+        dart format --set-exit-if-changed .
+
   test:
     description: "Test"
     packageFilters:

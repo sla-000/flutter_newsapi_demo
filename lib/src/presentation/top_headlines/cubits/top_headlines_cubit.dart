@@ -54,10 +54,12 @@ class TopHeadlinesCubit extends Cubit<TopHeadlinesState> {
 
       final articles = await getTopHeadlinesUsecase.call(sources: sourceIds);
 
-      emit(TopHeadlinesState.success(
-        articles: articles,
-        sourcesIds: sourceIds.toSet(),
-      ));
+      emit(
+        TopHeadlinesState.success(
+          articles: articles,
+          sourcesIds: sourceIds.toSet(),
+        ),
+      );
     } on Exception catch (error, stackTrace) {
       emit(TopHeadlinesState.error(error: error, stackTrace: stackTrace));
     }
