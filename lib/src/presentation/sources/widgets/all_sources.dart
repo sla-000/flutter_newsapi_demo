@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../di/di.dart';
 import '../../../domain/models/article_source_domain_model.dart';
 import '../cubits/sources_cubit.dart';
+
+const _switchDuration = Duration(milliseconds: 500);
 
 class AllSources extends StatelessWidget {
   const AllSources({
@@ -13,41 +12,44 @@ class AllSources extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (_) {
-          final sourcesCubit = di<SourcesCubit>();
-
-          unawaited(sourcesCubit.load());
-
-          return sourcesCubit;
-        },
-        child: const AllSourcesNews(),
-      );
-}
-
-class AllSourcesNews extends StatelessWidget {
-  const AllSourcesNews({
-    super.key,
-  });
-
-  @override
   Widget build(BuildContext context) => BlocBuilder<SourcesCubit, SourcesState>(
         builder: (context, state) => state.when(
-          initial: SizedBox.shrink,
-          loading: () => const Center(child: CircularProgressIndicator()),
-          success: (sources) => AllSourcesNewsSuccess(sources: sources),
-          error: (error, _) => Center(child: Text('Error: $error')),
+          initial: () => const AnimatedSwitcher(
+            key: Key('SourcesList'),
+            duration: _switchDuration,
+            child: SizedBox.shrink(),
+          ),
+          loading: () => const AnimatedSwitcher(
+            key: Key('SourcesList'),
+            duration: _switchDuration,
+            child: Center(child: CircularProgressIndicator()),
+          ),
+          success: (sources, selectedIds) => AnimatedSwitcher(
+            key: const Key('SourcesList'),
+            duration: _switchDuration,
+            child: SourcesListLoaded(
+              sources: sources,
+              selectedIds: selectedIds,
+            ),
+          ),
+          error: (error, _) => AnimatedSwitcher(
+            key: const Key('SourcesList'),
+            duration: _switchDuration,
+            child: Center(child: Text('Error: $error')),
+          ),
         ),
       );
 }
 
-class AllSourcesNewsSuccess extends StatelessWidget {
-  const AllSourcesNewsSuccess({
+class SourcesListLoaded extends StatelessWidget {
+  const SourcesListLoaded({
     super.key,
     required this.sources,
+    required this.selectedIds,
   });
 
   final List<ArticleSourceDomainModel> sources;
+  final Set<String> selectedIds;
 
   @override
   Widget build(BuildContext context) {
@@ -55,37 +57,44 @@ class AllSourcesNewsSuccess extends StatelessWidget {
       return const Center(child: Text('No sources'));
     }
 
-    return DefaultTabController(
-      length: sources.length,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('NewsAPI Demo'),
-          bottom: TabBar(
-            isScrollable: true,
-            tabs: sources
-                .map((source) => Tab(text: source.name))
-                .toList(growable: false),
-          ),
-        ),
-        body: TabBarView(
-          children: sources
-              .map((source) => OneSourceNews(source: source))
-              .toList(growable: false),
-        ),
-      ),
+    return Wrap(
+      children: sources
+          .map(
+            (source) => Padding(
+              padding: const EdgeInsets.all(8),
+              child: SourceChip(
+                id: source.id,
+                name: source.name,
+                selected: selectedIds.any((element) => element == source.id),
+              ),
+            ),
+          )
+          .toList(growable: false),
     );
   }
 }
 
-class OneSourceNews extends StatelessWidget {
-  const OneSourceNews({
+class SourceChip extends StatelessWidget {
+  const SourceChip({
     super.key,
-    required this.source,
+    required this.id,
+    required this.name,
+    required this.selected,
   });
 
-  final ArticleSourceDomainModel source;
+  final String id;
+  final String name;
+  final bool selected;
 
   @override
-  Widget build(BuildContext context) => Center(child: Text(source.id));
+  Widget build(BuildContext context) => ChoiceChip(
+        key: Key(id),
+        selected: selected,
+        label: Text(name),
+        onSelected: (selected) {
+          final sourcesCubit = context.read<SourcesCubit>();
+
+          selected ? sourcesCubit.select(id) : sourcesCubit.unselect(id);
+        },
+      );
 }

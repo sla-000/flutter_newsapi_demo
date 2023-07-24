@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../common/source_item.dart';
+import '../common/article_source.dart';
 
 part 'article_item.freezed.dart';
 part 'article_item.g.dart';
@@ -9,10 +9,10 @@ part 'article_item.g.dart';
 class ArticleItem with _$ArticleItem {
   const factory ArticleItem({
     /// The identifier id and a display name name for the source this article came from.
-    required SourceItem source,
+    required ArticleSource source,
 
     /// The author of the article
-    required String author,
+    required String? author,
 
     /// The headline or title of the article.
     required String title,
@@ -30,7 +30,7 @@ class ArticleItem with _$ArticleItem {
     required String publishedAt,
 
     /// The unformatted content of the article, where available. This is truncated to 200 chars.
-    required String content,
+    required String? content,
   }) = _ArticleItem;
 
   factory ArticleItem.fromJson(Map<String, Object?> json) =>

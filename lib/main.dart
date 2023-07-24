@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/di/di.dart';
-import 'src/presentation/sources/cubit/sources_cubit.dart';
+import 'src/presentation/sources/cubits/sources_cubit.dart';
 import 'src/presentation/sources/widgets/all_sources.dart';
+import 'src/presentation/top_headlines/widgets/articles_for_source.dart';
 
 void main() {
   configureDependencies();
@@ -31,5 +35,35 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) => const AllSources();
+  Widget build(BuildContext context) => BlocProvider(
+        create: (_) {
+          final sourcesCubit = di<SourcesCubit>();
+
+          unawaited(sourcesCubit.load());
+
+          return sourcesCubit;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: const Text('NewsAPI Demo'),
+          ),
+          body: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Scrollbar(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AllSources(),
+                    SizedBox(height: 16),
+                    ArticlesForSource(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
 }

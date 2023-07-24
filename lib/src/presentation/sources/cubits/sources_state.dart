@@ -8,6 +8,7 @@ class SourcesState with _$SourcesState {
 
   const factory SourcesState.success({
     required List<ArticleSourceDomainModel> sources,
+    @Default({}) Set<String> selectedIds,
   }) = SourcesStateSuccess;
 
   const factory SourcesState.error({

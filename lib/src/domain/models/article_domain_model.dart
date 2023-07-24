@@ -6,7 +6,7 @@ part 'article_domain_model.freezed.dart';
 class ArticleDomainModel with _$ArticleDomainModel {
   const factory ArticleDomainModel({
     /// The author of the article
-    required String author,
+    required String? author,
 
     /// The headline or title of the article.
     required String title,
@@ -18,6 +18,6 @@ class ArticleDomainModel with _$ArticleDomainModel {
     required String publishedAt,
 
     /// The unformatted content of the article, where available. This is truncated to 200 chars.
-    required String content,
+    required String? content,
   }) = _ArticleDomainModel;
 }

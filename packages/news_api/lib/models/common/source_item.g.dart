@@ -17,13 +17,22 @@ _$_SourceItem _$$_SourceItemFromJson(Map<String, dynamic> json) =>
       country: json['country'] as String?,
     );
 
-Map<String, dynamic> _$$_SourceItemToJson(_$_SourceItem instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'description': instance.description,
-      'url': instance.url,
-      'category': instance.category,
-      'language': instance.language,
-      'country': instance.country,
-    };
+Map<String, dynamic> _$$_SourceItemToJson(_$_SourceItem instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('url', instance.url);
+  writeNotNull('category', instance.category);
+  writeNotNull('language', instance.language);
+  writeNotNull('country', instance.country);
+  return val;
+}

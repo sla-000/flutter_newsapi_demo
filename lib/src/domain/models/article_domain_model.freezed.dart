@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ArticleDomainModel {
   /// The author of the article
-  String get author => throw _privateConstructorUsedError;
+  String? get author => throw _privateConstructorUsedError;
 
   /// The headline or title of the article.
   String get title => throw _privateConstructorUsedError;
@@ -29,7 +29,7 @@ mixin _$ArticleDomainModel {
   String get publishedAt => throw _privateConstructorUsedError;
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ArticleDomainModelCopyWith<ArticleDomainModel> get copyWith =>
@@ -43,11 +43,11 @@ abstract class $ArticleDomainModelCopyWith<$Res> {
       _$ArticleDomainModelCopyWithImpl<$Res, ArticleDomainModel>;
   @useResult
   $Res call(
-      {String author,
+      {String? author,
       String title,
       String description,
       String publishedAt,
-      String content});
+      String? content});
 }
 
 /// @nodoc
@@ -63,17 +63,17 @@ class _$ArticleDomainModelCopyWithImpl<$Res, $Val extends ArticleDomainModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? author = null,
+    Object? author = freezed,
     Object? title = null,
     Object? description = null,
     Object? publishedAt = null,
-    Object? content = null,
+    Object? content = freezed,
   }) {
     return _then(_value.copyWith(
-      author: null == author
+      author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -86,10 +86,10 @@ class _$ArticleDomainModelCopyWithImpl<$Res, $Val extends ArticleDomainModel>
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -103,11 +103,11 @@ abstract class _$$_ArticleDomainModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String author,
+      {String? author,
       String title,
       String description,
       String publishedAt,
-      String content});
+      String? content});
 }
 
 /// @nodoc
@@ -121,17 +121,17 @@ class __$$_ArticleDomainModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? author = null,
+    Object? author = freezed,
     Object? title = null,
     Object? description = null,
     Object? publishedAt = null,
-    Object? content = null,
+    Object? content = freezed,
   }) {
     return _then(_$_ArticleDomainModel(
-      author: null == author
+      author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -144,10 +144,10 @@ class __$$_ArticleDomainModelCopyWithImpl<$Res>
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -164,7 +164,7 @@ class _$_ArticleDomainModel implements _ArticleDomainModel {
 
   /// The author of the article
   @override
-  final String author;
+  final String? author;
 
   /// The headline or title of the article.
   @override
@@ -180,7 +180,7 @@ class _$_ArticleDomainModel implements _ArticleDomainModel {
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
   @override
-  final String content;
+  final String? content;
 
   @override
   String toString() {
@@ -215,16 +215,16 @@ class _$_ArticleDomainModel implements _ArticleDomainModel {
 
 abstract class _ArticleDomainModel implements ArticleDomainModel {
   const factory _ArticleDomainModel(
-      {required final String author,
+      {required final String? author,
       required final String title,
       required final String description,
       required final String publishedAt,
-      required final String content}) = _$_ArticleDomainModel;
+      required final String? content}) = _$_ArticleDomainModel;
 
   @override
 
   /// The author of the article
-  String get author;
+  String? get author;
   @override
 
   /// The headline or title of the article.
@@ -240,7 +240,7 @@ abstract class _ArticleDomainModel implements ArticleDomainModel {
   @override
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
-  String get content;
+  String? get content;
   @override
   @JsonKey(ignore: true)
   _$$_ArticleDomainModelCopyWith<_$_ArticleDomainModel> get copyWith =>

@@ -14,10 +14,19 @@ _$_SourcesRequest _$$_SourcesRequestFromJson(Map<String, dynamic> json) =>
       country: json['country'] as String?,
     );
 
-Map<String, dynamic> _$$_SourcesRequestToJson(_$_SourcesRequest instance) =>
-    <String, dynamic>{
-      'apiKey': instance.apiKey,
-      'category': instance.category,
-      'language': instance.language,
-      'country': instance.country,
-    };
+Map<String, dynamic> _$$_SourcesRequestToJson(_$_SourcesRequest instance) {
+  final val = <String, dynamic>{
+    'apiKey': instance.apiKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('category', instance.category);
+  writeNotNull('language', instance.language);
+  writeNotNull('country', instance.country);
+  return val;
+}

@@ -21,10 +21,10 @@ ArticleItem _$ArticleItemFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ArticleItem {
   /// The identifier id and a display name name for the source this article came from.
-  SourceItem get source => throw _privateConstructorUsedError;
+  ArticleSource get source => throw _privateConstructorUsedError;
 
   /// The author of the article
-  String get author => throw _privateConstructorUsedError;
+  String? get author => throw _privateConstructorUsedError;
 
   /// The headline or title of the article.
   String get title => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$ArticleItem {
   String get publishedAt => throw _privateConstructorUsedError;
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,16 +57,16 @@ abstract class $ArticleItemCopyWith<$Res> {
       _$ArticleItemCopyWithImpl<$Res, ArticleItem>;
   @useResult
   $Res call(
-      {SourceItem source,
-      String author,
+      {ArticleSource source,
+      String? author,
       String title,
       String description,
       String url,
       String urlToImage,
       String publishedAt,
-      String content});
+      String? content});
 
-  $SourceItemCopyWith<$Res> get source;
+  $ArticleSourceCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -83,23 +83,23 @@ class _$ArticleItemCopyWithImpl<$Res, $Val extends ArticleItem>
   @override
   $Res call({
     Object? source = null,
-    Object? author = null,
+    Object? author = freezed,
     Object? title = null,
     Object? description = null,
     Object? url = null,
     Object? urlToImage = null,
     Object? publishedAt = null,
-    Object? content = null,
+    Object? content = freezed,
   }) {
     return _then(_value.copyWith(
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as SourceItem,
-      author: null == author
+              as ArticleSource,
+      author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -120,17 +120,17 @@ class _$ArticleItemCopyWithImpl<$Res, $Val extends ArticleItem>
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SourceItemCopyWith<$Res> get source {
-    return $SourceItemCopyWith<$Res>(_value.source, (value) {
+  $ArticleSourceCopyWith<$Res> get source {
+    return $ArticleSourceCopyWith<$Res>(_value.source, (value) {
       return _then(_value.copyWith(source: value) as $Val);
     });
   }
@@ -145,17 +145,17 @@ abstract class _$$_ArticleItemCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SourceItem source,
-      String author,
+      {ArticleSource source,
+      String? author,
       String title,
       String description,
       String url,
       String urlToImage,
       String publishedAt,
-      String content});
+      String? content});
 
   @override
-  $SourceItemCopyWith<$Res> get source;
+  $ArticleSourceCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -170,23 +170,23 @@ class __$$_ArticleItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? source = null,
-    Object? author = null,
+    Object? author = freezed,
     Object? title = null,
     Object? description = null,
     Object? url = null,
     Object? urlToImage = null,
     Object? publishedAt = null,
-    Object? content = null,
+    Object? content = freezed,
   }) {
     return _then(_$_ArticleItem(
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as SourceItem,
-      author: null == author
+              as ArticleSource,
+      author: freezed == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -207,10 +207,10 @@ class __$$_ArticleItemCopyWithImpl<$Res>
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -233,11 +233,11 @@ class _$_ArticleItem implements _ArticleItem {
 
   /// The identifier id and a display name name for the source this article came from.
   @override
-  final SourceItem source;
+  final ArticleSource source;
 
   /// The author of the article
   @override
-  final String author;
+  final String? author;
 
   /// The headline or title of the article.
   @override
@@ -261,7 +261,7 @@ class _$_ArticleItem implements _ArticleItem {
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
   @override
-  final String content;
+  final String? content;
 
   @override
   String toString() {
@@ -307,14 +307,14 @@ class _$_ArticleItem implements _ArticleItem {
 
 abstract class _ArticleItem implements ArticleItem {
   const factory _ArticleItem(
-      {required final SourceItem source,
-      required final String author,
+      {required final ArticleSource source,
+      required final String? author,
       required final String title,
       required final String description,
       required final String url,
       required final String urlToImage,
       required final String publishedAt,
-      required final String content}) = _$_ArticleItem;
+      required final String? content}) = _$_ArticleItem;
 
   factory _ArticleItem.fromJson(Map<String, dynamic> json) =
       _$_ArticleItem.fromJson;
@@ -322,11 +322,11 @@ abstract class _ArticleItem implements ArticleItem {
   @override
 
   /// The identifier id and a display name name for the source this article came from.
-  SourceItem get source;
+  ArticleSource get source;
   @override
 
   /// The author of the article
-  String get author;
+  String? get author;
   @override
 
   /// The headline or title of the article.
@@ -350,7 +350,7 @@ abstract class _ArticleItem implements ArticleItem {
   @override
 
   /// The unformatted content of the article, where available. This is truncated to 200 chars.
-  String get content;
+  String? get content;
   @override
   @JsonKey(ignore: true)
   _$$_ArticleItemCopyWith<_$_ArticleItem> get copyWith =>

@@ -19,13 +19,22 @@ _$_TopHeadlinesRequest _$$_TopHeadlinesRequestFromJson(
     );
 
 Map<String, dynamic> _$$_TopHeadlinesRequestToJson(
-        _$_TopHeadlinesRequest instance) =>
-    <String, dynamic>{
-      'apiKey': instance.apiKey,
-      'country': instance.country,
-      'category': instance.category,
-      'sources': instance.sources,
-      'q': instance.q,
-      'pageSize': instance.pageSize,
-      'page': instance.page,
-    };
+    _$_TopHeadlinesRequest instance) {
+  final val = <String, dynamic>{
+    'apiKey': instance.apiKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('country', instance.country);
+  writeNotNull('category', instance.category);
+  writeNotNull('sources', instance.sources);
+  writeNotNull('q', instance.q);
+  writeNotNull('pageSize', instance.pageSize);
+  writeNotNull('page', instance.page);
+  return val;
+}

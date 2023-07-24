@@ -20,7 +20,9 @@ mixin _$SourcesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ArticleSourceDomainModel> sources) success,
+    required TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)
+        success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$SourcesState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult? Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$SourcesState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) =>
@@ -126,7 +132,9 @@ class _$SourcesStateInitial implements SourcesStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ArticleSourceDomainModel> sources) success,
+    required TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)
+        success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
     return initial();
@@ -137,7 +145,9 @@ class _$SourcesStateInitial implements SourcesStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult? Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
     return initial?.call();
@@ -148,7 +158,9 @@ class _$SourcesStateInitial implements SourcesStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
@@ -240,7 +252,9 @@ class _$SourcesStateLoading implements SourcesStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ArticleSourceDomainModel> sources) success,
+    required TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)
+        success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
     return loading();
@@ -251,7 +265,9 @@ class _$SourcesStateLoading implements SourcesStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult? Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
     return loading?.call();
@@ -262,7 +278,9 @@ class _$SourcesStateLoading implements SourcesStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
@@ -320,7 +338,7 @@ abstract class _$$SourcesStateSuccessCopyWith<$Res> {
           $Res Function(_$SourcesStateSuccess) then) =
       __$$SourcesStateSuccessCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ArticleSourceDomainModel> sources});
+  $Res call({List<ArticleSourceDomainModel> sources, Set<String> selectedIds});
 }
 
 /// @nodoc
@@ -335,12 +353,17 @@ class __$$SourcesStateSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sources = null,
+    Object? selectedIds = null,
   }) {
     return _then(_$SourcesStateSuccess(
       sources: null == sources
           ? _value._sources
           : sources // ignore: cast_nullable_to_non_nullable
               as List<ArticleSourceDomainModel>,
+      selectedIds: null == selectedIds
+          ? _value._selectedIds
+          : selectedIds // ignore: cast_nullable_to_non_nullable
+              as Set<String>,
     ));
   }
 }
@@ -349,8 +372,10 @@ class __$$SourcesStateSuccessCopyWithImpl<$Res>
 
 class _$SourcesStateSuccess implements SourcesStateSuccess {
   const _$SourcesStateSuccess(
-      {required final List<ArticleSourceDomainModel> sources})
-      : _sources = sources;
+      {required final List<ArticleSourceDomainModel> sources,
+      final Set<String> selectedIds = const {}})
+      : _sources = sources,
+        _selectedIds = selectedIds;
 
   final List<ArticleSourceDomainModel> _sources;
   @override
@@ -360,9 +385,18 @@ class _$SourcesStateSuccess implements SourcesStateSuccess {
     return EqualUnmodifiableListView(_sources);
   }
 
+  final Set<String> _selectedIds;
+  @override
+  @JsonKey()
+  Set<String> get selectedIds {
+    if (_selectedIds is EqualUnmodifiableSetView) return _selectedIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_selectedIds);
+  }
+
   @override
   String toString() {
-    return 'SourcesState.success(sources: $sources)';
+    return 'SourcesState.success(sources: $sources, selectedIds: $selectedIds)';
   }
 
   @override
@@ -370,12 +404,16 @@ class _$SourcesStateSuccess implements SourcesStateSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SourcesStateSuccess &&
-            const DeepCollectionEquality().equals(other._sources, _sources));
+            const DeepCollectionEquality().equals(other._sources, _sources) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedIds, _selectedIds));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_sources));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_sources),
+      const DeepCollectionEquality().hash(_selectedIds));
 
   @JsonKey(ignore: true)
   @override
@@ -389,10 +427,12 @@ class _$SourcesStateSuccess implements SourcesStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ArticleSourceDomainModel> sources) success,
+    required TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)
+        success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
-    return success(sources);
+    return success(sources, selectedIds);
   }
 
   @override
@@ -400,10 +440,12 @@ class _$SourcesStateSuccess implements SourcesStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult? Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
-    return success?.call(sources);
+    return success?.call(sources, selectedIds);
   }
 
   @override
@@ -411,12 +453,14 @@ class _$SourcesStateSuccess implements SourcesStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(sources);
+      return success(sources, selectedIds);
     }
     return orElse();
   }
@@ -461,10 +505,11 @@ class _$SourcesStateSuccess implements SourcesStateSuccess {
 
 abstract class SourcesStateSuccess implements SourcesState {
   const factory SourcesStateSuccess(
-          {required final List<ArticleSourceDomainModel> sources}) =
-      _$SourcesStateSuccess;
+      {required final List<ArticleSourceDomainModel> sources,
+      final Set<String> selectedIds}) = _$SourcesStateSuccess;
 
   List<ArticleSourceDomainModel> get sources;
+  Set<String> get selectedIds;
   @JsonKey(ignore: true)
   _$$SourcesStateSuccessCopyWith<_$SourcesStateSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -545,7 +590,9 @@ class _$SourcesStateError implements SourcesStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ArticleSourceDomainModel> sources) success,
+    required TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)
+        success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
     return error(this.error, stackTrace);
@@ -556,7 +603,9 @@ class _$SourcesStateError implements SourcesStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult? Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
     return error?.call(this.error, stackTrace);
@@ -567,7 +616,9 @@ class _$SourcesStateError implements SourcesStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleSourceDomainModel> sources)? success,
+    TResult Function(
+            List<ArticleSourceDomainModel> sources, Set<String> selectedIds)?
+        success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
