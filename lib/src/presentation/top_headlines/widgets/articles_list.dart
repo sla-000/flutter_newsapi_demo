@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../domain/models/article_domain_model.dart';
 import '../../utils/l10n_utils.dart';
+import '../cubits/favorite_article.dart';
 import '../cubits/top_headlines_cubit.dart';
 
 const _switchDuration = Duration(milliseconds: 500);
@@ -34,10 +35,13 @@ class ArticlesList extends StatelessWidget {
               ),
             ),
           ),
-          success: (articles, sourcesIds) => AnimatedSwitcher(
+          success: (articles, _, favoriteArticles) => AnimatedSwitcher(
             key: const Key('ArticlesList'),
             duration: _switchDuration,
-            child: ArticlesListLoaded(articles: articles),
+            child: ArticlesListLoaded(
+              articles: articles,
+              favoriteArticles: favoriteArticles,
+            ),
           ),
           error: (error, _) => AnimatedSwitcher(
             key: const Key('ArticlesList'),
@@ -58,25 +62,42 @@ class ArticlesListLoaded extends StatelessWidget {
   const ArticlesListLoaded({
     super.key,
     required this.articles,
+    required this.favoriteArticles,
   });
 
   final List<ArticleDomainModel> articles;
+  final Set<FavoriteArticle> favoriteArticles;
 
   @override
   Widget build(BuildContext context) => Column(
         children: articles
-            .map((article) => OneArticle(article: article))
+            .map(
+              (article) => OneArticle(
+                article: article,
+                isFavorite: favoriteArticles.any(
+                  (favoriteArticle) =>
+                      _isArticleTheSame(favoriteArticle, article),
+                ),
+              ),
+            )
             .toList(growable: false),
       );
+
+  bool _isArticleTheSame(
+          FavoriteArticle favoriteArticle, ArticleDomainModel article) =>
+      favoriteArticle.title == article.title &&
+      favoriteArticle.publishedAt == article.publishedAt;
 }
 
 class OneArticle extends StatelessWidget {
   const OneArticle({
     super.key,
     required this.article,
+    required this.isFavorite,
   });
 
   final ArticleDomainModel article;
+  final bool isFavorite;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -88,7 +109,10 @@ class OneArticle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-                TimeAuthorLike(article: article),
+                TimeAuthorLike(
+                  article: article,
+                  isFavorite: isFavorite,
+                ),
                 if (article.title != null) ...[
                   const SizedBox(height: _spacing),
                   Text(
@@ -128,9 +152,11 @@ class TimeAuthorLike extends StatelessWidget {
   const TimeAuthorLike({
     super.key,
     required this.article,
+    required this.isFavorite,
   });
 
   final ArticleDomainModel article;
+  final bool isFavorite;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -157,8 +183,18 @@ class TimeAuthorLike extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.favorite_outline),
-            onPressed: () {},
+            icon: isFavorite
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_outline),
+            onPressed: () {
+              isFavorite
+                  ? unawaited(context
+                      .read<TopHeadlinesCubit>()
+                      .removeFromFavorite(article: article))
+                  : unawaited(context
+                      .read<TopHeadlinesCubit>()
+                      .addToFavorite(article: article));
+            },
           ),
         ],
       );

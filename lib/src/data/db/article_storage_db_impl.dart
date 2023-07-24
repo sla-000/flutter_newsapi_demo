@@ -32,9 +32,6 @@ class ArticleStorageDbImpl implements ArticleStorageDb {
 
   @override
   FutureOr<void> removeArticle({
-    /// The author of the article
-    required String? author,
-
     /// The headline or title of the article.
     required String? title,
 
@@ -46,9 +43,6 @@ class ArticleStorageDbImpl implements ArticleStorageDb {
 
   @override
   FutureOr<bool> checkArticleIsSaved({
-    /// The author of the article
-    required String? author,
-
     /// The headline or title of the article.
     required String? title,
 

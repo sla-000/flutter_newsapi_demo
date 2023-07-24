@@ -20,8 +20,8 @@ mixin _$TopHeadlinesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)
+    required TResult Function(List<ArticleDomainModel> articles,
+            Set<String> sourcesIds, Set<FavoriteArticle> favoriteArticles)
         success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) =>
@@ -30,8 +30,8 @@ mixin _$TopHeadlinesState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult? Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) =>
@@ -40,7 +40,8 @@ mixin _$TopHeadlinesState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -132,8 +133,8 @@ class _$TopHeadlinesStateInitial implements TopHeadlinesStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)
+    required TResult Function(List<ArticleDomainModel> articles,
+            Set<String> sourcesIds, Set<FavoriteArticle> favoriteArticles)
         success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
@@ -145,8 +146,8 @@ class _$TopHeadlinesStateInitial implements TopHeadlinesStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult? Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
@@ -158,7 +159,8 @@ class _$TopHeadlinesStateInitial implements TopHeadlinesStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -252,8 +254,8 @@ class _$TopHeadlinesStateLoading implements TopHeadlinesStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)
+    required TResult Function(List<ArticleDomainModel> articles,
+            Set<String> sourcesIds, Set<FavoriteArticle> favoriteArticles)
         success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
@@ -265,8 +267,8 @@ class _$TopHeadlinesStateLoading implements TopHeadlinesStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult? Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
@@ -278,7 +280,8 @@ class _$TopHeadlinesStateLoading implements TopHeadlinesStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -337,7 +340,10 @@ abstract class _$$TopHeadlinesStateSuccessCopyWith<$Res> {
           $Res Function(_$TopHeadlinesStateSuccess) then) =
       __$$TopHeadlinesStateSuccessCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ArticleDomainModel> articles, Set<String> sourcesIds});
+  $Res call(
+      {List<ArticleDomainModel> articles,
+      Set<String> sourcesIds,
+      Set<FavoriteArticle> favoriteArticles});
 }
 
 /// @nodoc
@@ -353,6 +359,7 @@ class __$$TopHeadlinesStateSuccessCopyWithImpl<$Res>
   $Res call({
     Object? articles = null,
     Object? sourcesIds = null,
+    Object? favoriteArticles = null,
   }) {
     return _then(_$TopHeadlinesStateSuccess(
       articles: null == articles
@@ -363,6 +370,10 @@ class __$$TopHeadlinesStateSuccessCopyWithImpl<$Res>
           ? _value._sourcesIds
           : sourcesIds // ignore: cast_nullable_to_non_nullable
               as Set<String>,
+      favoriteArticles: null == favoriteArticles
+          ? _value._favoriteArticles
+          : favoriteArticles // ignore: cast_nullable_to_non_nullable
+              as Set<FavoriteArticle>,
     ));
   }
 }
@@ -372,9 +383,11 @@ class __$$TopHeadlinesStateSuccessCopyWithImpl<$Res>
 class _$TopHeadlinesStateSuccess implements TopHeadlinesStateSuccess {
   const _$TopHeadlinesStateSuccess(
       {required final List<ArticleDomainModel> articles,
-      final Set<String> sourcesIds = const {}})
+      final Set<String> sourcesIds = const {},
+      final Set<FavoriteArticle> favoriteArticles = const {}})
       : _articles = articles,
-        _sourcesIds = sourcesIds;
+        _sourcesIds = sourcesIds,
+        _favoriteArticles = favoriteArticles;
 
   final List<ArticleDomainModel> _articles;
   @override
@@ -393,9 +406,18 @@ class _$TopHeadlinesStateSuccess implements TopHeadlinesStateSuccess {
     return EqualUnmodifiableSetView(_sourcesIds);
   }
 
+  final Set<FavoriteArticle> _favoriteArticles;
+  @override
+  @JsonKey()
+  Set<FavoriteArticle> get favoriteArticles {
+    if (_favoriteArticles is EqualUnmodifiableSetView) return _favoriteArticles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_favoriteArticles);
+  }
+
   @override
   String toString() {
-    return 'TopHeadlinesState.success(articles: $articles, sourcesIds: $sourcesIds)';
+    return 'TopHeadlinesState.success(articles: $articles, sourcesIds: $sourcesIds, favoriteArticles: $favoriteArticles)';
   }
 
   @override
@@ -405,14 +427,17 @@ class _$TopHeadlinesStateSuccess implements TopHeadlinesStateSuccess {
             other is _$TopHeadlinesStateSuccess &&
             const DeepCollectionEquality().equals(other._articles, _articles) &&
             const DeepCollectionEquality()
-                .equals(other._sourcesIds, _sourcesIds));
+                .equals(other._sourcesIds, _sourcesIds) &&
+            const DeepCollectionEquality()
+                .equals(other._favoriteArticles, _favoriteArticles));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_articles),
-      const DeepCollectionEquality().hash(_sourcesIds));
+      const DeepCollectionEquality().hash(_sourcesIds),
+      const DeepCollectionEquality().hash(_favoriteArticles));
 
   @JsonKey(ignore: true)
   @override
@@ -427,12 +452,12 @@ class _$TopHeadlinesStateSuccess implements TopHeadlinesStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)
+    required TResult Function(List<ArticleDomainModel> articles,
+            Set<String> sourcesIds, Set<FavoriteArticle> favoriteArticles)
         success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
-    return success(articles, sourcesIds);
+    return success(articles, sourcesIds, favoriteArticles);
   }
 
   @override
@@ -440,12 +465,12 @@ class _$TopHeadlinesStateSuccess implements TopHeadlinesStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult? Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
-    return success?.call(articles, sourcesIds);
+    return success?.call(articles, sourcesIds, favoriteArticles);
   }
 
   @override
@@ -453,13 +478,14 @@ class _$TopHeadlinesStateSuccess implements TopHeadlinesStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(articles, sourcesIds);
+      return success(articles, sourcesIds, favoriteArticles);
     }
     return orElse();
   }
@@ -504,11 +530,14 @@ class _$TopHeadlinesStateSuccess implements TopHeadlinesStateSuccess {
 
 abstract class TopHeadlinesStateSuccess implements TopHeadlinesState {
   const factory TopHeadlinesStateSuccess(
-      {required final List<ArticleDomainModel> articles,
-      final Set<String> sourcesIds}) = _$TopHeadlinesStateSuccess;
+          {required final List<ArticleDomainModel> articles,
+          final Set<String> sourcesIds,
+          final Set<FavoriteArticle> favoriteArticles}) =
+      _$TopHeadlinesStateSuccess;
 
   List<ArticleDomainModel> get articles;
   Set<String> get sourcesIds;
+  Set<FavoriteArticle> get favoriteArticles;
   @JsonKey(ignore: true)
   _$$TopHeadlinesStateSuccessCopyWith<_$TopHeadlinesStateSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -591,8 +620,8 @@ class _$TopHeadlinesStateError implements TopHeadlinesStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)
+    required TResult Function(List<ArticleDomainModel> articles,
+            Set<String> sourcesIds, Set<FavoriteArticle> favoriteArticles)
         success,
     required TResult Function(Exception error, StackTrace stackTrace) error,
   }) {
@@ -604,8 +633,8 @@ class _$TopHeadlinesStateError implements TopHeadlinesStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult? Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult? Function(Exception error, StackTrace stackTrace)? error,
   }) {
@@ -617,7 +646,8 @@ class _$TopHeadlinesStateError implements TopHeadlinesStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds)?
+    TResult Function(List<ArticleDomainModel> articles, Set<String> sourcesIds,
+            Set<FavoriteArticle> favoriteArticles)?
         success,
     TResult Function(Exception error, StackTrace stackTrace)? error,
     required TResult orElse(),

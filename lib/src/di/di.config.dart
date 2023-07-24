@@ -96,7 +96,11 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i21.SourcesCubit>(() =>
         _i21.SourcesCubit(getSourcesUsecase: gh<_i17.GetSourcesUsecase>()));
     gh.factory<_i22.TopHeadlinesCubit>(() => _i22.TopHeadlinesCubit(
-        getTopHeadlinesUsecase: gh<_i20.GetTopHeadlinesUsecase>()));
+          getTopHeadlinesUsecase: gh<_i20.GetTopHeadlinesUsecase>(),
+          saveArticleUsecase: gh<_i9.SaveArticleUsecase>(),
+          removeArticleUsecase: gh<_i8.RemoveArticleUsecase>(),
+          checkArticleSavedUsecase: gh<_i6.CheckArticleSavedUsecase>(),
+        ));
     return this;
   }
 }

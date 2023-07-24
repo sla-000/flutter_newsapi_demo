@@ -11,9 +11,6 @@ class CheckArticleSavedUsecase {
   final ArticleStorageDb articleStorageDb;
 
   Future<bool> call({
-    /// The author of the article
-    required String? author,
-
     /// The headline or title of the article.
     required String? title,
 
@@ -21,7 +18,6 @@ class CheckArticleSavedUsecase {
     required String? publishedAt,
   }) async =>
       await articleStorageDb.checkArticleIsSaved(
-        author: author,
         title: title,
         publishedAt: publishedAt,
       );

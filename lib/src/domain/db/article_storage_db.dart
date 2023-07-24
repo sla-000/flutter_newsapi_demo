@@ -24,9 +24,6 @@ abstract class ArticleStorageDb {
   });
 
   FutureOr<void> removeArticle({
-    /// The author of the article
-    required String? author,
-
     /// The headline or title of the article.
     required String? title,
 
@@ -35,9 +32,6 @@ abstract class ArticleStorageDb {
   });
 
   FutureOr<bool> checkArticleIsSaved({
-    /// The author of the article
-    required String? author,
-
     /// The headline or title of the article.
     required String? title,
 

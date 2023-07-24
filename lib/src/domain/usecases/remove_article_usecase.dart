@@ -11,9 +11,6 @@ class RemoveArticleUsecase {
   final ArticleStorageDb articleStorageDb;
 
   Future<void> call({
-    /// The author of the article
-    required String? author,
-
     /// The headline or title of the article.
     required String? title,
 
@@ -21,7 +18,6 @@ class RemoveArticleUsecase {
     required String? publishedAt,
   }) async =>
       await articleStorageDb.removeArticle(
-        author: author,
         title: title,
         publishedAt: publishedAt,
       );
