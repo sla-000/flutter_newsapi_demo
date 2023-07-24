@@ -18,15 +18,21 @@ class ArticlesList extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<TopHeadlinesCubit, TopHeadlinesState>(
         builder: (context, state) => state.when(
-          initial: () => const AnimatedSwitcher(
-            key: Key('ArticlesList'),
+          initial: () => AnimatedSwitcher(
+            key: const Key('ArticlesList'),
             duration: _switchDuration,
-            child: SizedBox.shrink(),
+            child: SizedBox(height: MediaQuery.sizeOf(context).height),
           ),
-          loading: () => const AnimatedSwitcher(
-            key: Key('ArticlesList'),
+          loading: () => AnimatedSwitcher(
+            key: const Key('ArticlesList'),
             duration: _switchDuration,
-            child: Center(child: CircularProgressIndicator()),
+            child: SizedBox(
+              height: MediaQuery.sizeOf(context).height,
+              child: const Align(
+                alignment: Alignment.topCenter,
+                child: CircularProgressIndicator(),
+              ),
+            ),
           ),
           success: (articles) => AnimatedSwitcher(
             key: const Key('ArticlesList'),
@@ -36,7 +42,13 @@ class ArticlesList extends StatelessWidget {
           error: (error, _) => AnimatedSwitcher(
             key: const Key('ArticlesList'),
             duration: _switchDuration,
-            child: Center(child: Text('Error: $error')),
+            child: SizedBox(
+              height: MediaQuery.sizeOf(context).height,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text('Error: $error'),
+              ),
+            ),
           ),
         ),
       );

@@ -27,7 +27,7 @@ class ArticlesForSource extends StatelessWidget {
           ),
           builder: (context, state) => state.maybeWhen(
             success: (_, selectedIds) => const ArticlesList(),
-            orElse: SizedBox.shrink,
+            orElse: () => SizedBox(height: MediaQuery.sizeOf(context).height),
           ),
         ),
       );

@@ -15,12 +15,12 @@ class AllSources extends StatelessWidget {
   Widget build(BuildContext context) => BlocBuilder<SourcesCubit, SourcesState>(
         builder: (context, state) => state.when(
           initial: () => const AnimatedSwitcher(
-            key: Key('SourcesList'),
+            key: Key('AllSources'),
             duration: _switchDuration,
             child: SizedBox.shrink(),
           ),
           loading: () => const AnimatedSwitcher(
-            key: Key('SourcesList'),
+            key: Key('AllSources'),
             duration: _switchDuration,
             child: SizedBox(
               height: 100,
@@ -30,7 +30,7 @@ class AllSources extends StatelessWidget {
             ),
           ),
           success: (sources, selectedIds) => AnimatedSwitcher(
-            key: const Key('SourcesList'),
+            key: const Key('AllSources'),
             duration: _switchDuration,
             child: SourcesListLoaded(
               sources: sources,
@@ -38,7 +38,7 @@ class AllSources extends StatelessWidget {
             ),
           ),
           error: (error, _) => AnimatedSwitcher(
-            key: const Key('SourcesList'),
+            key: const Key('AllSources'),
             duration: _switchDuration,
             child: Center(child: Text('Error: $error')),
           ),
@@ -59,7 +59,7 @@ class SourcesListLoaded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (sources.isEmpty) {
-      return const Center(child: Text('No sources'));
+      return const Center(child: Text('No sources, try to refresh'));
     }
 
     return Wrap(
