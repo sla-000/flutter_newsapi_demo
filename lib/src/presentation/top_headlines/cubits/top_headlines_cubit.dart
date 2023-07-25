@@ -43,14 +43,7 @@ class TopHeadlinesCubit extends Cubit<TopHeadlinesState> {
   late final Timer _timer;
 
   void _onTimer(_) {
-    final currentState = state;
-
-    if (currentState is TopHeadlinesStateSuccess) {
-      final sourcesIds = currentState.sourcesIds;
-      if (sourcesIds.isNotEmpty) {
-        unawaited(load(sourceIds: sourcesIds));
-      }
-    }
+    unawaited(refresh());
   }
 
   @override
@@ -58,6 +51,22 @@ class TopHeadlinesCubit extends Cubit<TopHeadlinesState> {
     _timer.cancel();
 
     await super.close();
+  }
+
+  Future<void> refresh() async {
+    final currentState = state;
+
+    if (currentState is! TopHeadlinesStateSuccess) {
+      return;
+    }
+
+    final currentSourcesIds = currentState.sourcesIds;
+
+    if (currentSourcesIds.isEmpty) {
+      return;
+    }
+
+    await load(sourceIds: currentSourcesIds);
   }
 
   Future<void> load({required Iterable<String> sourceIds}) async {
